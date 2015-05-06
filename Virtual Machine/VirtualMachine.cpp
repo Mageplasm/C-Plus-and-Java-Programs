@@ -84,8 +84,7 @@ void Schedule()
 	TMachineSignalState Oldstate;
 	MachineSuspendSignals(&Oldstate);
 
-	//cout<<"help"<<endl;
-	
+
 	//Check what thread has the highest priority 
         if (highQueue.empty())
         {
@@ -133,7 +132,6 @@ void Schedule()
 }
 
 void AlarmCallback(void *param){
-	//cout<<"wtf"<<endl;
 	int done = 0;
 	for (unsigned int i = 0;i < sleeping.size(); i++)
 	{	
@@ -178,7 +176,7 @@ void MyMachineFileCallback(void *calldata, int result){
 	Schedule();
 }
 
-void skeleton(void * TCBref) {//code from piazza post 652 modified to fit our needs
+void skeleton(void * TCBref) {
 	MachineEnableSignals();
 	threadControlBlock* curTCB = (threadControlBlock *)TCBref;
 	curTCB->entry(curTCB->param);//does it need the &?
@@ -509,10 +507,6 @@ TVMStatus VMThreadState(TVMThreadID thread, TVMThreadStateRef stateref){
 	if (stateref == NULL) 
 		return VM_STATUS_ERROR_INVALID_PARAMETER; 
 
-
-
-
-
 	int found = 0;
 	int pos = 0;
 	TMachineSignalState Oldstate;
@@ -629,9 +623,6 @@ TVMStatus VMMutexAcquire (TVMMutexID mutex, TVMTick timeout)
 }
 
 
-
-
- 
 TVMStatus VMMutexRelease(TVMMutexID mutex){
      TMachineSignalState Oldstate;
         MachineSuspendSignals(&Oldstate);
