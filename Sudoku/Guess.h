@@ -10,13 +10,12 @@ using namespace std;
 class Guess
 {
 	private:
-	stack<Puzzle> alternatives;
-	stack<vector<vector<char> > > array;  
+		stack<Puzzle> alternatives;
+		stack<vector<vector<char> > > array;  
 
 	public:
-	Guess(Puzzle, vector<vector<char> >); 
-	void choose(); 
-
+		Guess(Puzzle, vector<vector<char> >); 
+		void choose(); 
 };
 
 #endif

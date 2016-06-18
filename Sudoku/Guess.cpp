@@ -51,7 +51,6 @@ void Guess::choose()
 		options = puzz.getPuzzle(); 
 		options2 = puzz.getPuzzle();
 
-
         for (int i = 0; i < 81; i++)
         {
             if(column == 9)

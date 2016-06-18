@@ -7,11 +7,9 @@ using namespace std;
 
 bool Simplify::rowSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> >& input)
 {
-	int row = 0; 
-	int num = 0;
- 	int j = 0; 
-	bool changed = false; 
-	bool changed2 = false; 
+	int row = 0, num = 0;
+ 	int column_reset = 0; 
+	bool changed = false, changed2 = false; 
 	bool error1 = false; 
 	bool errorRec1 = false, errorRec2 = false, errorRec3 = false;  
 
@@ -22,17 +20,16 @@ bool Simplify::rowSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> >&
 			if ((i%9) == 0)
 			{
 				row++; 
-				j = 0; 
+				column_reset = 0; 
 			}
 		}
 
 		//If the cell already decided skip it
-		if(input[row][j] != '.')
+		if(input[row][column_reset] != '.')
 		{
-			j++; 
+			column_reset++; 
 			continue; 
 		}
-
 
 		//Scan the row for each cell
 		for (int column = 0; column < 9; column++) 
@@ -47,25 +44,23 @@ bool Simplify::rowSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> >&
 				num = (input[row][column] - '0') - 1;
 				Puzzle[i][num] = 0; 
 			}
-
 		}
 
 		//Possiblities narrowed to 1 change that cell to the appropriate
 		//number
-        if (input[row][j] == '.')
-			changeCell(i, 0, row, j, Puzzle, input, &changed, &changed2); 
+        if (input[row][column_reset] == '.')
+			changeCell(i, 0, row, column_reset, Puzzle, input, &changed, &changed2); 
 
 		if (changed2 == true)
-			error(input, input[row][j], row, j, &error1); 
+			error(input, input[row][column_reset], row, column_reset, &error1); 
 
 		if (error1 == true) 
 			return error1; 			
 
-		j++;
+		column_reset++;
 
 		error1 = false;
 		changed2 = false;  
-
 	}
 	
 	//If we decided a cell do rowSimplify again
@@ -86,13 +81,10 @@ bool Simplify::columnSimplify(vector<vector<bool> >& Puzzle, vector<vector<char>
 {
     int row = 0;
     int num = 0;
-    int j = 0;
-    bool changed = false;
-	bool changed2 = false;
+    int column_reset = 0;
+    bool changed = false, changed2 = false;
 	bool error1 = false;  
     bool errorRec1 = false, errorRec2 = false, errorRec3 = false;
-
-
 
     for (int i = 0; i < 81; i++)
     {
@@ -101,53 +93,48 @@ bool Simplify::columnSimplify(vector<vector<bool> >& Puzzle, vector<vector<char>
             if ((i%9) == 0)
             {
                 row++;
-                j = 0;
+                column_reset = 0;
             }
         }
 
-
-        if(input[row][j] != '.')
+        if(input[row][column_reset] != '.')
         {
-            j++;
+            column_reset++;
             continue;
         }
-
 
 		//We iterated through the column instead of the row
         for (int r = 0; r < 9; r++)
         {
-            if(input[r][j] == '.')
+            if(input[r][column_reset] == '.')
             {
                 continue;
             }
 
             else
             {
-                num = (input[r][j] - '0') - 1;
+                num = (input[r][column_reset] - '0') - 1;
                 Puzzle[i][num] = 0;
             }
 
         }
 		//
 
-
-        if (input[row][j] == '.')
-			changeCell(i, 0, row, j, Puzzle, input, &changed, &changed2); 
-
+        if (input[row][column_reset] == '.')
+			changeCell(i, 0, row, column_reset, Puzzle, input, &changed, &changed2); 
 
         if (changed2 == true)
-            error(input, input[row][j], row, j, &error1);
+            error(input, input[row][column_reset], row, column_reset, &error1);
 
         if (error1 == true)
             return error1;
 
-        j++;
+        column_reset++;
 
         error1 = false;
         changed2 = false;
 
     }
-
 
     if (changed == true)
 	{
@@ -156,10 +143,8 @@ bool Simplify::columnSimplify(vector<vector<bool> >& Puzzle, vector<vector<char>
 		errorRec3 = blockSimplify(Puzzle, input); 
 	}
 
-
     if (errorRec1 == true || errorRec2 == true || errorRec3 == true)
         return true;
-
 
 	return false; 
 }
@@ -170,17 +155,12 @@ bool Simplify::blockSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> 
 {
     int row = 0;
     int num = 0;
-    int j = 0;
-	int scanR; 
-	int scanC;
-	int limitR; 
-	int limitC;  
-    bool changed = false;
-	bool changed2 = false; 
+    int column_reset = 0;
+	int scanR, scanC;
+	int limitR, limitC;  
+    bool changed = false, changed2 = false; 
 	bool error1 = false; 
     bool errorRec1 = false, errorRec2 = false, errorRec3 = false;
-
-
 
     for (int i = 0; i < 81; i++)
     {
@@ -189,26 +169,24 @@ bool Simplify::blockSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> 
             if ((i%9) == 0)
             {
                 row++;
-                j = 0;
+                column_reset = 0;
             }
         }
 
-
-        if(input[row][j] != '.')
+        if(input[row][column_reset] != '.')
         {
-            j++;
+            column_reset++;
             continue;
         }
 
 		scanR = row; 
-		scanC = j; 
+		scanC = column_reset; 
 
 		scanBlock(&scanR, &scanC);
 		int save = scanC; 
 
 	    limitR = scanR + 3;
         limitC = scanC + 3;
-
 
    		for (; scanR < limitR; scanR++)
         {
@@ -226,27 +204,24 @@ bool Simplify::blockSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> 
            	 	}
 
         	}
+
 			scanC = save; 
 		}	
 
-
-
-        if (input[row][j] == '.')
-			changeCell(i, 0, row, j, Puzzle, input, &changed, &changed2); 		
+        if (input[row][column_reset] == '.')
+			changeCell(i, 0, row, column_reset, Puzzle, input, &changed, &changed2); 		
 
         if (changed2 == true)
-            error(input, input[row][j], row, j, &error1);
+            error(input, input[row][column_reset], row, column_reset, &error1);
 
         if (error1 == true)
             return error1;
 
-        j++;
+        column_reset++;
 
         error1 = false;
         changed2 = false;
-
     }
-
 
     if (changed == true)
     {
@@ -325,17 +300,17 @@ void Simplify::scanBlock(int* row, int* column)
 void Simplify::changeCell(int index, int count, int row, int column,
 vector<vector<bool> > Puzzle, vector<vector<char> >& input, bool* changed, bool* changed2)
 {
+	int pos = 0;
 
-	//Value of the cell in the char array 
-	int pos = 0; 
+	//Value of the cell in the char array  
 	int value = 0; 
 
-	for (int a = 0; a < 9; a++)
+	for (int i = 0; i < 9; i++)
     {
-    	if(Puzzle[index][a] == true)
+    	if(Puzzle[index][i] == true)
         {
         	count++;
-           	pos = a + 1;
+           	pos = i + 1;
 			value = pos + '0'; 
         }
    	}
@@ -358,8 +333,7 @@ void Simplify::error(vector<vector<char> > input, char value, int row, int colum
 
     int save = scanC;
 
-    int limitR;
-    int limitC;
+    int limitR, limitC;
 
 	//Check for duplicate values
 	//Scan the row
@@ -410,8 +384,6 @@ void Simplify::error(vector<vector<char> > input, char value, int row, int colum
 
 		scanC = save; 
 	}
-
-
 }
 
 
