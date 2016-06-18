@@ -8,7 +8,6 @@ public class Map {
 	private boolean flag = false; 
 	Pair testInt;  
 
-	
 	//Create an empty Map	
 	public Map()
 	{
@@ -16,8 +15,6 @@ public class Map {
 		set = new MapIterator();
 		testInt = new Pair(null, null);
 		testInt = null; 
-		
-		
 	}
 	
 	//Set MapIterator to point to the beginning of the Map
@@ -26,7 +23,6 @@ public class Map {
 		mapIterator = new MapIterator(); 
 		mapIterator.set(this); 
 		return this.mapIterator; 
-		
 	}
 	
 	//Set MapIterator to point to the end of the Map
@@ -40,16 +36,10 @@ public class Map {
 		
 		s = set; 
 
-		//int limit = (this.length()-1); 
-		
 		for (int pos  = 0; pos < this.length(); pos++)
 		{
-			
-			
 			if(pos > 0)
 			s.advance();
-				
-			
 		}
 		
 		if(!flag)
@@ -61,9 +51,9 @@ public class Map {
 		return s; 
 	}
 
-	
 	//Return the first Pair in the Map
-	public Pair first(){
+	public Pair first()
+	{
 		Node currentNode = head; 
 		
 		if(this.length() == 0)
@@ -76,15 +66,11 @@ public class Map {
 	}
 	
 	//Set Map head to point to the rest of the Map
-	public Map rest(){
-		
+	public Map rest()
+	{
 		 Map newSeq = new Map(); 
 		 newSeq.head = this.head.getNext(); 
-		 
 		 newSeq.length = this.length - 1; 
-		 
-		/*head1 = this.head.getNext(); 
-		return this;*/
 	
 		 return newSeq; 
 		
@@ -100,7 +86,6 @@ public class Map {
 			return; 
 		
 		for(int i = 0; currentNode.getNext() != null ; i++)
-			
 		{
 			
 			if((inval.getKey().Get() > ((Pair)currentNode.getNext().getData()).getKey().Get() || inval.getKey().Get() ==((Pair)currentNode.getNext().getData()).getKey().Get()) && currentNode.getNext() != null)
