@@ -108,18 +108,25 @@ public class Map {
 	}
 
 	//Return the number of elements in the Map	
-	public int length(){
+	public int length()
+	{
 		int size = 0;
 	 	Node currentNode = head.getNext();
-	 	while (currentNode != null){
-	 	currentNode = currentNode.getNext();
-	 	size++;
+	 	
+	 	while (currentNode != null)
+	 	{
+		 	currentNode = currentNode.getNext();
+		 	size++;
 	 	}
 	 	 
-	 	if(length == size){
-	 	return length;
-	 	}else{
-	 	return size;
+	 	if(length == size)
+	 	{
+	 		return length;
+	 	}
+	 	
+	 	else
+	 	{
+	 		return size;
 	 	}
 	}
 
@@ -137,7 +144,7 @@ public class Map {
 			set = p.getKey(); 
 			
 			if(key.Get() == set.Get())
-			break; 
+				break; 
 		}
 		
 		return start; 
@@ -150,17 +157,17 @@ public class Map {
 		Node currentNode = head.getNext(); 
 		System.out.print("[ "); 
 
-		 while (currentNode != null) {
+		 while (currentNode != null) 
+		 {
 	        	data = (Pair)currentNode.getData();
 	        	data.Print();
-	            currentNode = currentNode.getNext();
+	            	currentNode = currentNode.getNext();
 	            
-	            if(currentNode != null)
-	            	System.out.print(" ");
+	            	if(currentNode != null)
+	            		System.out.print(" ");
 	        }
+	        
 		System.out.print(" ]"); 
-		
-		
 	}
 	
 	//Return the head of the Map 
