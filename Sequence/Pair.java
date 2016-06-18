@@ -1,6 +1,6 @@
 
 public class Pair extends Element {
-
+	
 	private MyChar key; //Key of the Element
 	private Element value; //Value of the Element
 	
@@ -25,9 +25,5 @@ public class Pair extends Element {
 		System.out.print(" ");
 		value.Print(); 
 		System.out.print(")");
-
-
-
-
 	}
 }
