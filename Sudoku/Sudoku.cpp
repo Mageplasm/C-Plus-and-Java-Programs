@@ -10,7 +10,6 @@ using namespace std;
 void readPuzzle(vector<vector<char> >&); 
 vector<vector<bool> > initOptions(Puzzle, vector<vector<char> >); 
 
-
 int main()
 {
 	vector<vector<char> > puzzle(9, vector<char> (9, 0)); 
