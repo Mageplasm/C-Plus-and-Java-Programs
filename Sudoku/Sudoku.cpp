@@ -39,7 +39,7 @@ int main()
 //Function to read in Puzzle to be solved
 void readPuzzle(vector<vector<char> >& Puzzle)
 {
-	//Initialize row and column to start inputting valeus
+	//Initialize row and column to start inputting values
 	int row = 0;
 	int column = 0;
 
