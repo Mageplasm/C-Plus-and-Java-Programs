@@ -21,6 +21,7 @@ public class Matrix extends Sequence{
         for (int i = 0; i < rowsize; i++)
         {
             row = new Sequence();
+            
             for (int j =0; j < colsize; j++)
             {
                 row.add(initial, j); 
