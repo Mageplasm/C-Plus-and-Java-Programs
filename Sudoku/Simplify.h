@@ -14,8 +14,6 @@ class Simplify
 		void changeCell(int, int, int, int, vector<vector<bool> >, vector<vector<char> >&, bool* changed, bool* changed2);
 		void error(vector<vector<char> >, char, int, int, bool*); 
 		void hiddenSingles(vector<vector<bool> >& Puzzle, vector<vector<char> >& input);  
-
-
 };
 
 #endif

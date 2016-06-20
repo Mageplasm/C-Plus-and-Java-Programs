@@ -26,7 +26,6 @@ int main()
 	sim.columnSimplify(options, puzzle); 
 	sim.blockSimplify(options, puzzle);
 
-
 	new_puzz.setPuzzle(options);
 
 	Guess itsG(new_puzz, puzzle);
@@ -49,8 +48,7 @@ void readPuzzle(vector<vector<char> >& Puzzle)
 	char c;  
 	
 	while (!feof(stdin) && cin.get(c))
-	{
-		
+	{		
 		if (row > 8)
 			continue; 
  
@@ -63,7 +61,6 @@ void readPuzzle(vector<vector<char> >& Puzzle)
 			row++; 
 		}
 	}
-
 }
 
 //Function to initialize possible options for all 81 elements in the table
@@ -78,7 +75,6 @@ vector<vector<bool> > initOptions(Puzzle puzzle, vector<vector<char> > inputPuzz
 	//1 indicated the number is possible while 0 indicates it is not
 	for(int i = 0; i < 81; i++) 
 	{
-
 		if(column == 9) 
 		{
 			column = 0; 

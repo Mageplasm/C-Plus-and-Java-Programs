@@ -116,7 +116,6 @@ bool Simplify::columnSimplify(vector<vector<bool> >& Puzzle, vector<vector<char>
                 num = (input[r][column_reset] - '0') - 1;
                 Puzzle[i][num] = 0;
             }
-
         }
 		//
 
@@ -133,7 +132,6 @@ bool Simplify::columnSimplify(vector<vector<bool> >& Puzzle, vector<vector<char>
 
         error1 = false;
         changed2 = false;
-
     }
 
     if (changed == true)
@@ -239,7 +237,6 @@ bool Simplify::blockSimplify(vector<vector<bool> >& Puzzle, vector<vector<char> 
 //Find the appropriate block to scan for the cell
 void Simplify::scanBlock(int* row, int* column)
 {
-
 	if ((0 <= *row && *row < 3)	&& (0 <= *column && *column < 3))
 	{
 		*row = 0; 
@@ -293,8 +290,6 @@ void Simplify::scanBlock(int* row, int* column)
 		*row = 6; 
 		*column = 6; 
 	}
-
-
 }
 
 void Simplify::changeCell(int index, int count, int row, int column,
