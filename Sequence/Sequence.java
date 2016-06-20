@@ -26,8 +26,8 @@ public class Sequence extends Element  {
 	public SequenceIterator begin()	{
 		iteratorNode = new SequenceIterator();
 
-		 iteratorNode.set(this); 
-		 return this.iteratorNode; 
+		iteratorNode.set(this); 
+		return this.iteratorNode; 
 		
 	}
 	
@@ -46,13 +46,9 @@ public class Sequence extends Element  {
 		int limit = (this.length()-1); 
 		
 		for (int pos  = 0; pos < this.length(); pos++)
-		{
-			
-			
+		{	
 			if(pos > 0)
-			s.advance();
-				
-			
+				s.advance();
 		}
 		
 		if(!flag)
@@ -67,12 +63,10 @@ public class Sequence extends Element  {
 
 	
 	//Add an element to the sequence at the specified index
-	public void add(Element data, int index){
+	public void add(Element data, int index)
+	{
 		Node newNode = new Node(data); 
 		Node currentNode = head;
-
-		//if (index < 0 || index > listCount)
-		//	return;  
 		
 		for (int i = 0; i < index && currentNode.getNext() != null; i++)
 			currentNode = currentNode.getNext(); 
@@ -81,14 +75,14 @@ public class Sequence extends Element  {
 		
 		currentNode.setNext(newNode); 
 		
-			listCount++; 
-			}
+		listCount++; 
+	}
 	
 	//Return the element at the specified position in the Sequence
 	public Element index(int pos){
 		
 		if (pos < 0)
-            		return null;
+            return null;
 		
 		Node currentNode = head.getNext(); 
 		
@@ -97,12 +91,10 @@ public class Sequence extends Element  {
 			if(currentNode.getNext() == null)
 				return null; 
 		
-		currentNode = currentNode.getNext(); 
+			currentNode = currentNode.getNext(); 
 		}
 		
 		return currentNode.getData(); 
-		
-		
 	}
 	
 
@@ -123,12 +115,8 @@ public class Sequence extends Element  {
 		 newSeq.head = this.head.getNext(); 
 		 
 		 newSeq.listCount = this.listCount - 1; 
-		 
-		/*head1 = this.head.getNext(); 
-		return this;*/
 	
 		 return newSeq; 
-		
 	}
 	
 	//Delete an element at the specified position
@@ -144,7 +132,7 @@ public class Sequence extends Element  {
 			if (currentNode.getNext() == null)
 				return false; 
 			
-		currentNode = currentNode.getNext(); 
+			currentNode = currentNode.getNext(); 
 		}
 		
 		currentNode.setNext(currentNode.getNext().getNext());
@@ -156,24 +144,24 @@ public class Sequence extends Element  {
 	public int length(){
 		int size = 0;
 	 	Node currentNode = head.getNext();
+
 	 	while (currentNode != null){
-	 	currentNode = currentNode.getNext();
-	 	size++;
+		 	currentNode = currentNode.getNext();
+		 	size++;
 	 	}
 	 	//return size;
 	 	 
 	 	if(listCount == size){
-	 	return listCount;
-	 	}else{
-	 	//System.out.println("DONTMATCH \n\n\n\n\n\n\n size is : " + size);
-	 	return size;
+	 		return listCount;
+	 	}
+	 	else{
+	 		return size;
 	 	}
 	}
 	
 	
 	//New Sequence will contain no inner sequences
 	public Sequence flatten(){
-		
 		Node currentNode = head.getNext();
 		Sequence newSequence = new Sequence();
 		Sequence tempSeq; 
@@ -190,7 +178,6 @@ public class Sequence extends Element  {
 			{
 				tempSeq = currentNode.getData().flatten(); 
 				limit = pos + tempSeq.listCount; 
-				
 				
 				for(; pos < limit; pos++)
 				{
@@ -221,7 +208,6 @@ public class Sequence extends Element  {
 		
 		for (e = updatedSequence.first(); position < size;  ){ 
 			if (e instanceof Sequence){
-			
 				nwSeq.add(((Sequence)e).copy(), position); 
 			}
 			
@@ -239,43 +225,34 @@ public class Sequence extends Element  {
 					newInt.Set(((MyInteger) e).Get()); 
 					nwSeq.add(newInt, position); 
 				}
-					
-				
 			}
 			
 			updatedSequence = updatedSequence.rest();	
 			e = updatedSequence.first();
-			
-			
-		
-			
 			position++; 
 		}
-		
-		
+
 		return nwSeq; 
 	}
 	
 	
 	//Print the Sequence
-	public void Print() {
-		 	Element data; 
-	        Node currentNode = head.getNext();
-        	System.out.print("[ ");
-	        while (currentNode != null) {
-	        	data = currentNode.getData();
-	        	data.Print();
-	            currentNode = currentNode.getNext();
-	            
-	            if(currentNode != null)
-	            	System.out.print(" ");
-	        }
-        	System.out.print(" ]");
+	public void Print(){
+	 	Element data; 
+        Node currentNode = head.getNext();
+    	System.out.print("[ ");
 
-	        
-	        
-	 
-	    }
+        while (currentNode != null) {
+        	data = currentNode.getData();
+        	data.Print();
+            currentNode = currentNode.getNext();
+            
+            if(currentNode != null)
+            	System.out.print(" ");
+        }
+
+    	System.out.print(" ]"); 
+	}
 	 
 	 //Return the head of the Sequence 
 	 public Node returnH()
@@ -283,26 +260,21 @@ public class Sequence extends Element  {
 		 return head; 
 	 }
 	 
-	 
 	 //Adjust the node's value at a certain position in the matrix
-	 public void node_index(int row_num, MyInteger e){
+	 public void node_index(int row_num, MyInteger e){		
+		if (row_num < 0)
+            return ;
 			
-			if (row_num < 0)
-	            return ;
-			
-			Node currentNode = head.getNext(); 
-			
-			for (int i = 0; i < row_num; i++)
-			{
-				if(currentNode.getNext() == null)
-					return ; 
-			
+		Node currentNode = head.getNext(); 
+		
+		for (int i = 0; i < row_num; i++)
+		{
+			if(currentNode.getNext() == null)
+				return ; 
+		
 			currentNode = currentNode.getNext(); 
-			}
-			
-			currentNode.setData(e); 
-			
-			
 		}
-	
+		
+		currentNode.setData(e); 	
+	}
 }
